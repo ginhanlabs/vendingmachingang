@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ISoda } from '../shared/Soda.model';
+import { SodaService } from '../shared/soda.service';
 
 @Component({
   selector: 'app-inventory',
@@ -7,20 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  sodaList = [
-    {name: 'Coke', price: 1.50, stock: 5, img : ''},
-    {name: 'Sprite', price: 1.50, stock: 5, img : ''},
-    {name: 'Ice Tea', price: 2.00, stock: 5, img : ''},
-    {name: 'Pepsi', price: 1.50, stock: 5, img : ''},
-    {name: 'Diet Coke', price: 1.50, stock: 5, img : ''},
-    {name: 'Fanta', price: 1.50, stock: 5, img : ''},
-    {name: 'Lemonade', price: 1.50, stock: 5, img : ''},
-    {name: 'Root Beer', price: 1.50, stock: 5, img : ''},
-    {name: 'Ginger Ale', price: 1.50, stock: 5, img : ''},
-  ]
-  constructor() { }
+  sodaList:ISoda[];
+
+  constructor(private sodaService : SodaService) { }
 
   ngOnInit(): void {
+    //TODO use observables later
+    this.sodaList =  this.sodaService.getSodas();
   }
 
 }

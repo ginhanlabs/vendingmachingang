@@ -1,6 +1,8 @@
 <div class="soda-container">
     <div *ngFor="let soda of sodaList">
-        {{soda.img }}
-        {{ soda.name}} - {{ soda.price}}
+        <img src="{{ soda.img }}"/>
+        <div>
+            {{ soda.name}} - {{ soda.price}}
+        </div>
     </div>
 </div>

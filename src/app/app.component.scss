@@ -6,9 +6,9 @@
 
 }
 
-header { background-color: red; 
+header { 
+    margin: 5px;
     grid-column: 1 /4; 
-    border: 1px solid green;
     }
 
 /* TODO future to use a subgrid */
