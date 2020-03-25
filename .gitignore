@@ -51,3 +51,4 @@ Thumbs.db
 environment.*
 protractor.conf.json
 karma.conf.js
+/e2e
