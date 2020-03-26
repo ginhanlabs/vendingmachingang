@@ -1,8 +1,9 @@
 <div class="soda-container">
-    <div *ngFor="let soda of sodaList">
+    <div *ngFor="let soda of sodaList" class="soda-button">
+        <div>{{ soda.name}}</div>
         <img src="{{ soda.img }}"/>
         <div>
-            {{ soda.name}} - {{ soda.price}}
+            {{ soda.price| currency}}
         </div>
     </div>
 </div>
