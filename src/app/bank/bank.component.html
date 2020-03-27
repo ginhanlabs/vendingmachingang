@@ -1,12 +1,20 @@
 <h4>Insert money</h4>
-<div *ngFor="let money of money">
-    {{ money.name}} {{ money.amount}}
+<div *ngFor="let money of money" class="money-container">
+ 
+    <div>{{ money.name}}</div>
+    <div [ngClass]="{coin:true, 'dollar': money.type==='dollar'}" class="coin"
+        (click)="insertMoney(money.value)">
+        {{ money.amount}}
+    </div> 
+    
 </div>
+<br/><br/>
+<label for="insertCoins">Amount inserted:</label>
+<input type="text" id="insertCoins" readonly
+    [(ngModel)]="moneyInserted" >
 <br/>
-<label for="insertCoins"></label>
-<input type="text" id="insertCoins">
 <br/>
-<br/>
-<button type="button">
+<button type="button"
+    (click) = "onCancel()">
     Cancel
 </button>

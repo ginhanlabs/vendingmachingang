@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Money } from '../shared/money.model';
 import { BankService } from '../shared/bank.service';
+import { formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-bank',
@@ -9,6 +10,7 @@ import { BankService } from '../shared/bank.service';
 })
 export class BankComponent implements OnInit {
 
+  moneyInserted: number = 0;
   money: Money[];
 
   constructor(private bankService: BankService) { }
@@ -17,4 +19,13 @@ export class BankComponent implements OnInit {
     this.money = this.bankService.getMoney();
   }
 
+  insertMoney(moneyInserted: number){
+    this.moneyInserted = this.moneyInserted * 100;
+    this.moneyInserted +=moneyInserted;
+    this.moneyInserted = this.moneyInserted / 100;
+  }
+
+  onCancel(){
+    this.moneyInserted = 0;
+  }
 }

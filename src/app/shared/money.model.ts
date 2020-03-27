@@ -1,4 +1,7 @@
 export interface Money {
+    id: number,
     name: string,
-    amount: number
+    amount: number,
+    type: string,
+    value: number
 }
