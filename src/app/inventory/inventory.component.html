@@ -1,5 +1,7 @@
+<div *ngIf="!canBuy">Please insert correct amount.</div>
 <div class="soda-container">
-    <div *ngFor="let soda of sodaList" class="soda-button">
+   
+    <div *ngFor="let soda of sodaList" class="soda-button" (click)="onBuy(soda)">
         <div>{{ soda.name}}</div>
         <img src="{{ soda.img }}"/>
         <div>

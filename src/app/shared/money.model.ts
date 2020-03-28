@@ -1,4 +1,4 @@
-export interface Money {
+export interface IMoney {
     id: number,
     name: string,
     amount: number,

@@ -3,7 +3,7 @@
  
     <div>{{ money.name}}</div>
     <div [ngClass]="{coin:true, 'dollar': money.type==='dollar'}" class="coin"
-        (click)="insertMoney(money.value)">
+        (click)="insertMoney(money)">
         {{ money.amount}}
     </div> 
     
