@@ -2,19 +2,19 @@
 <div *ngFor="let money of money" class="money-container">
  
     <div>{{ money.name}}</div>
-    <div [ngClass]="{coin:true, 'dollar': money.type==='dollar'}" class="coin"
+    <div [ngClass]="{coin:true, 'dollar': money.type==='dollar', 'no-money': money.amount === 0}"
         (click)="insertMoney(money)">
         {{ money.amount}}
     </div> 
     
 </div>
 <br/><br/>
-<label for="insertCoins">Amount inserted:</label>
-<input type="text" id="insertCoins" readonly
-    [(ngModel)]="moneyInserted" >
-<br/>
-<br/>
+Amount inserted:
+<div class="inserted-money-box">{{ moneyInserted | currency}}</div>
+
 <button type="button"
+    class="cancel-button"
     (click) = "onCancel()">
     Cancel
 </button>
+

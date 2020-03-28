@@ -1,1 +1,4 @@
-You bought: 0 sodas
+You bought: {{ cartItems.length}} sodas
+<div *ngFor="let item of cartItems">
+    {{ item.name }}
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMoney } from '../shared/money.model';
 import { BankService } from '../shared/bank.service';
-import { Observable, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bank',
@@ -21,14 +21,16 @@ export class BankComponent implements OnInit, OnDestroy {
   }
 
   insertMoney(moneyInserted: IMoney){
-    // TODO fix formatting ie 2.00 not displaying using input
-    this.moneyInserted += moneyInserted.value;
-    this.bankService.moneySpent(moneyInserted);
-    this.bankService.moneyChanged
-    .subscribe( money =>{
-      // TODO update the coin amount
-      console.log(JSON.stringify(money));
-    })
+    if (moneyInserted.amount > 0){
+      this.moneyInserted += moneyInserted.value;
+      this.bankService.moneySpent(moneyInserted);
+      this.bankSubscription =this.bankService.moneyChanged
+      .subscribe( money =>{
+        // TODO update the coin amount
+        console.log(JSON.stringify(money));
+      });
+    };
+    
   }
 
   onCancel(){

@@ -26,14 +26,14 @@ export class InventoryComponent implements OnInit {
     this.moneyInserted = this.bankService.getMoneytInserted();
     this.sodaList.find(s => {
       if (s.price === this.moneyInserted && s.id === sodaSelected.id) {
-        //TODO add to cart
         this.canBuy = true;
+        this.sodaService.buySoda(sodaSelected);
+        console.log(" inserted " + this.moneyInserted  + ' soda = ' + sodaSelected.price);
       } else {
         this.canBuy = false;
+        console.log(" can't buy soda = " + sodaSelected.price);
       }
     })
-    console.log(" inserted " + this.moneyInserted  + ' soda = ' + sodaSelected.price);
-    
   }
 
 }

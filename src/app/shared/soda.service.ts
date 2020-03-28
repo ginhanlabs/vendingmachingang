@@ -1,6 +1,11 @@
 import { ISoda } from './Soda.model'
+import { Subject } from 'rxjs';
 
 export class SodaService {
+
+    sodaChanged = new Subject();
+
+    sodasBought = [];
 
     sodas:ISoda[] = [
         {id: 1, name: 'Coke', price: 1.50, stock: 5, img : 'assets/img/soda.jpg'},
@@ -16,6 +21,14 @@ export class SodaService {
 
     getSodas() {
         return this.sodas;
+    }
+
+    buySoda(sodasBought: ISoda) {
+        this.sodasBought.push(sodasBought);
+        let soda = {
+            name: sodasBought.name
+        }
+        this.sodaChanged.next(soda);
     }
 }
     
