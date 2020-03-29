@@ -5,10 +5,12 @@
         [ngClass]="{'soda-button': true,'sold-out': soda.stock < 1}"
         (click)="onBuy(soda)">
         <div>{{ soda.name}}</div>
-        {{soda.stock}}
         <img src="{{ soda.img }}"/>
-        <div>
+        <div *ngIf="soda.stock > 0">
             {{ soda.price| currency}}
+        </div>
+        <div *ngIf="soda.stock < 1" class="sold-out-text">
+           Sold out
         </div>
     </div>
 </div>
