@@ -2,9 +2,10 @@
 <div class="good message" *ngIf="canBuy">Select your drink.</div>
 <div class="soda-container">
     <div *ngFor="let soda of sodaList" 
-        class="soda-button" 
+        [ngClass]="{'soda-button': true,'sold-out': soda.stock < 1}"
         (click)="onBuy(soda)">
         <div>{{ soda.name}}</div>
+        {{soda.stock}}
         <img src="{{ soda.img }}"/>
         <div>
             {{ soda.price| currency}}

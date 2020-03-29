@@ -10,20 +10,20 @@ import { ISoda } from '../shared/Soda.model';
 })
 export class CartComponent implements OnInit, OnDestroy {
 
-  sodaSubscription: Subscription;
+  sodaPurchasedSubscription: Subscription;
   cartItems = [];
 
   constructor(private sodaService: SodaService) { }
 
   ngOnInit(): void {
-    this.sodaSubscription = this.sodaService.sodaChanged
+    this.sodaPurchasedSubscription = this.sodaService.sodaPurchased
       .subscribe(s => {
         this.cartItems.push(s);
       })
   }
 
   ngOnDestroy(){
-    this.sodaSubscription.unsubscribe();
+    this.sodaPurchasedSubscription.unsubscribe();
   }
 
 }

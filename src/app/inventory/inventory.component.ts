@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ISoda } from '../shared/Soda.model';
 import { SodaService } from '../shared/soda.service';
 import { BankService } from '../shared/bank.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent implements OnInit, OnDestroy {
 
+  sodaSubscription:Subscription;
   canBuy: boolean = true;
   moneyInserted: number;
-  sodaList:ISoda[];
+  sodaList: ISoda[] = [];
 
   constructor(private sodaService : SodaService, private bankService: BankService) { }
 
   ngOnInit(): void {
     //TODO use observables later
-    this.sodaList =  this.sodaService.getSodas();
+   this.sodaList =  [... this.sodaService.getSodas()];
+   this.sodaSubscription = this.sodaService.sodaStockUpdate.subscribe(sodaList => {
+     this.sodaList = [...this.sodaList];
+   })
   }
 
   onBuy(sodaSelected: ISoda):void {
@@ -34,6 +39,10 @@ export class InventoryComponent implements OnInit {
         console.log(" can't buy soda = " + sodaSelected.price);
       }
     })
+  }
+
+  ngOnDestroy(){
+    this.sodaSubscription.unsubscribe();
   }
 
 }

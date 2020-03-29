@@ -2,7 +2,8 @@
 <div *ngFor="let money of money" class="money-container">
  
     <div>{{ money.name}}</div>
-    <div [ngClass]="{coin:true, 'dollar': money.type==='dollar', 'no-money': money.amount === 0}"
+    <div [ngClass]="{coin:true, 'dollar': money.type==='dollar', 
+        'no-money': money.amount === 0}"
         (click)="insertMoney(money)">
         {{ money.amount}}
     </div> 
