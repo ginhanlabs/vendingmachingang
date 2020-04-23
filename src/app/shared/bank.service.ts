@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 export class BankService {
 
-    moneyChanged= new Subject();
+    moneyChanged =  new Subject<IMoney[]>();
 
     private insertedMoney: number = 0;
     private money: IMoney;
