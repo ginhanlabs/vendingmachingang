@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMoney } from '../shared/money.model';
 import { BankService } from '../shared/bank.service';
 import {  Subscription } from 'rxjs';
+import { SodaService } from '../shared/soda.service';
 
 @Component({
   selector: 'app-bank',
@@ -11,13 +12,18 @@ import {  Subscription } from 'rxjs';
 export class BankComponent implements OnInit, OnDestroy {
 
   bankSubscription: Subscription;
+  sodaSubscription: Subscription;
   moneyInserted: number = 0;
   money: IMoney[];
 
-  constructor(private bankService: BankService ) { }
+  constructor(private bankService: BankService, private sodaService: SodaService ) { }
+  
 
   ngOnInit(): void {
     this.money = this.bankService.getMoney();
+    this.sodaSubscription = this.sodaService.sodaStockUpdate.subscribe(sodaList => {
+      this.clearAmountInserted();
+    })
   }
 
   insertMoney(moneyInserted: IMoney){
@@ -30,12 +36,16 @@ export class BankComponent implements OnInit, OnDestroy {
         console.log(JSON.stringify(money));
       });
     };
-    
+  }
+
+  
+  clearAmountInserted():void {
+      this.moneyInserted = 0;
   }
 
   onCancel(){
-    this.moneyInserted = 0;
-    this.bankService.resetInsertedMoney();
+    this.clearAmountInserted();
+    this.bankService.refund();
   }
 
   ngOnDestroy(): void {
